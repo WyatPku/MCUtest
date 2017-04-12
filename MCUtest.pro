@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,8 +25,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    MCULIB/gsmlib.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    MCULIB/gsmlib.h
 
 FORMS    += mainwindow.ui
