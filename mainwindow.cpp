@@ -4,7 +4,9 @@
 #include "QDebug"
 #include "QThread"
 #include "QElapsedTimer"
+#include <QDateTime>
 
+QSerialPort MainWindow::serial;
 #define NeedCom
 
 void dprint (const char* s) {
@@ -15,13 +17,30 @@ void delay100ms () {
     QElapsedTimer t;
     t.start();
     while (t.elapsed() < 100) {
-        //QCoreApplication::processEvents();
+        QCoreApplication::processEvents();
     }
 }
+void SetMotorLevel(int level) {
+    dprint(QString("set level at %d !").arg(level).toStdString().data());
+}
+
+void MainWindow::serial_send(const char* s, int length) {
+    serial.write(s, length);
+}
+
 void MainWindow::read_Com() {
     QByteArray temp = serial.readAll();
+    QString str = "收到消息on";
+    str += QDateTime::currentDateTime().toString();
+    qDebug(str.toStdString().data());
+    //dprint(temp.data());
     for (int i=0; i<temp.length(); ++i) {
-        GSM_input(temp.at(i));
+        char x = temp.at(i);
+        textStr += QString(x);
+        ui->plainTextEdit_Text->setPlainText(textStr);
+        hexStr += QString("%02 ").arg((int)x);
+        ui->plainTextEdit_Hex->setPlainText(hexStr);
+        GSM_input(x);
         //add new here
     }
 }
@@ -51,6 +70,8 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
     GSM_dprint = dprint;
     GSM_delay100ms = delay100ms;
+    GSM_send = serial_send;
+    GSM_SetMotorLevel = SetMotorLevel;
 }
 
 MainWindow::~MainWindow()
@@ -62,4 +83,9 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_GSM_ConnectToServer_clicked()
 {
     GSM_Initial();
+}
+
+void MainWindow::on_pushButton_GSM_Disconnect_clicked()
+{
+    GSM_Disconnect();
 }

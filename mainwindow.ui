@@ -14,13 +14,13 @@
    <string>模块调试助手</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="groupBox_GSM">
     <property name="geometry">
      <rect>
       <x>50</x>
       <y>40</y>
-      <width>331</width>
-      <height>211</height>
+      <width>661</width>
+      <height>511</height>
      </rect>
     </property>
     <property name="title">
@@ -75,17 +75,37 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QPlainTextEdit" name="plainTextEdit_Hex">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>230</y>
+       <width>281</width>
+       <height>271</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="plainTextEdit_Text">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>40</y>
+       <width>331</width>
+       <height>461</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_GSM_Disconnect">
      <property name="geometry">
       <rect>
        <x>30</x>
        <y>180</y>
-       <width>271</width>
-       <height>16</height>
+       <width>121</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="text">
-      <string>发送信息和接收信息请在控制台查看</string>
+      <string>Disconnect</string>
      </property>
     </widget>
    </widget>
